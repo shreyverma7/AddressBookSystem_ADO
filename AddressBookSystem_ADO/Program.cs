@@ -6,6 +6,7 @@ internal class Program
     {
         Console.WriteLine("-------: AddressBookSystem :-----");
         AddressBookOperation Operation = new AddressBookOperation();
-        Operation.CreateDatabase();
+        //Operation.CreateDatabase();
+        Operation.CreateTable();
     }
 }
