@@ -20,6 +20,19 @@ internal class Program
             Email = "shrey@gmail.com",
 
         };
-        Operation.exuctedorNot(Operation.AddEmployee(data));
+        AddressModel edit = new AddressModel()
+        {
+            FirstName = "hello",
+            LastName = "world",
+            Address = "cpu",
+            City = "updatedata",
+            State = "update",
+            Zip = 601201,
+            PhoneNumber = "1234567890",
+            Email = "shrey@gmail.com",
+
+        };
+       // Operation.exuctedorNot(Operation.InsertData(data));
+       Operation.exuctedorNot(Operation.EditData(data));
     }
 }
