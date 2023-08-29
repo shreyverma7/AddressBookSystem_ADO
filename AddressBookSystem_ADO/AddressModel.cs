@@ -17,6 +17,6 @@ namespace AddressBookSystem_ADO
         public long Zip { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        public int count { get; set; }
+        
     }
 }
