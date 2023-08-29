@@ -32,7 +32,12 @@ internal class Program
             Email = "shrey@gmail.com",
 
         };
-       // Operation.exuctedorNot(Operation.InsertData(data));
-       Operation.exuctedorNot(Operation.EditData(data));
+        AddressModel delete = new AddressModel()
+        {
+            FirstName = "hello",
+        };
+        // Operation.exuctedorNot(Operation.InsertData(data));
+        //Operation.exuctedorNot(Operation.EditData(data));
+        Operation.exuctedorNot(Operation.DeleteDatat(data));
     }
 }
