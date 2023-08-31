@@ -39,9 +39,13 @@ internal class Program
         // Operation.exuctedorNot(Operation.InsertData(data));
         //Operation.exuctedorNot(Operation.EditData(data));
         // Operation.exuctedorNot(Operation.DeleteDatat(data));
-        string city = "Chennai";
-        Operation.GetAllEmployeeDetailsByCity(city);
-        Operation.DisplayAllData(city);
-        
+        string citysearch = "processor";
+        string statesearch = "Hardware";
+        //Operation.GetAllEmployeeDetailsByCity(citysearch);
+        //Operation.DisplayAllDataByCity(citysearch);
+        Operation.GetAllEmployeeDetailsByState(statesearch);
+        Operation.DisplayAllDataByState(statesearch);
+
+
     }
 }
