@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -154,7 +155,7 @@ namespace AddressBookSystem_ADO
                 connection();
                 SqlCommand com = new SqlCommand("DeleteContactDetails", con);
                 com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@FirstName", obj.FirstName); 
+                com.Parameters.AddWithValue("@FirstName", obj.FirstName);
                 con.Open();
                 int i = com.ExecuteNonQuery(); //Execute and return the num of records added
                 con.Close();
@@ -176,9 +177,67 @@ namespace AddressBookSystem_ADO
             {
                 con.Close();
             }
+        }
+        //UC6
+        public List<AddressModel> GetAllEmployeeDetailsByCity(string City)
+        {
+            connection();
+            List<AddressModel> emplist = new List<AddressModel>();
+            SqlCommand com = new SqlCommand("DetailsinCity", con);
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@City", City);
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);
+            con.Close();
+            foreach (DataRow dr in dt.Rows)
+            {
+                emplist.Add(
+                    new AddressModel
+                    {
+                        Id = Convert.ToInt32(dr["id"]),
+                        FirstName = Convert.ToString(dr["firstname"]),
+                        LastName = Convert.ToString(dr["lastname"]),
+                        Address = Convert.ToString(dr["address"]),
+                        City = Convert.ToString(dr["city"]),
+                        State = Convert.ToString(dr["state"]),
+                        Zip = Convert.ToInt64(dr["zip"]),
+                        PhoneNumber = Convert.ToString(dr["phone"]),
+                        Email = Convert.ToString(dr["email"]),
+                       
+                    }
+                    );
+            }
+            return emplist;
 
         }
+        public void DisplayAllData(string search)
+        {
+            try
+            {
+                // EmployeeOperation employeeDataAccess = new EmployeeOperation(); // Replace with your actual class name
+                
+                List<AddressModel> employees = GetAllEmployeeDetailsByCity(search);
 
-
+                foreach (AddressModel data in employees)
+                {
+                    Console.WriteLine($"Id: {data.Id}");
+                    Console.WriteLine($"firstname: {data.FirstName}");
+                    Console.WriteLine($"lastname: {data.LastName}");
+                    Console.WriteLine($"Address: {data.Address}");
+                    Console.WriteLine($"city: {data.City}");
+                    Console.WriteLine($"state: {data.State}");
+                    Console.WriteLine($"zip: {data.Zip}");
+                    Console.WriteLine($"phone: {data.PhoneNumber}");
+                    Console.WriteLine($"email: {data.Email}");
+                    Console.WriteLine("--------------------");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
     }
 }
