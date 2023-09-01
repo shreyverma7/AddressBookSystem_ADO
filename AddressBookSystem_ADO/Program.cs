@@ -48,7 +48,8 @@ internal class Program
         // Operation.SizeByCity();
         //Operation.SizeByState();
         //Operation.GetPeopleInCitySortedByName("processor");
-        Operation.CountByType();
+       // Operation.CountByType();
+        Operation.PersonAsTwoRelation("kanha", "Profession");
 
 
     }
