@@ -301,6 +301,7 @@ namespace AddressBookSystem_ADO
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }
+        //UC7
         public void SizeByCity()
         {
             try
@@ -377,7 +378,7 @@ namespace AddressBookSystem_ADO
                 con.Close();
             }
         }
-
+        //UC8
         public void GetPeopleInCitySortedByName(string City)
         {
             try
@@ -412,6 +413,46 @@ namespace AddressBookSystem_ADO
                 foreach (var data in emplist)
                 {
                     Console.WriteLine(data.Id+" "+ data.FirstName + " " + data.LastName);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        //UC9 work only in database
+
+        //UC10
+        public void CountByType()
+        {
+            try
+            {
+                connection();
+                SqlCommand com = new SqlCommand("CountByType", con);
+                com.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter da = new SqlDataAdapter(com);
+                List<AddressModel> addressBook = new List<AddressModel>();
+                DataTable dt = new DataTable();
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    addressBook.Add(
+                        new AddressModel
+                        {
+                            Relation = Convert.ToString(dr["Relation"]),
+                            Count = Convert.ToInt32(dr["count"])
+                        });
+                }
+                Console.WriteLine("No.of persons in each type are: ");
+                foreach (var data in addressBook)
+                {
+                    Console.WriteLine(data.Relation + "--" + data.Count);
                 }
             }
             catch (Exception ex)

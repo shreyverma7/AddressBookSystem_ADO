@@ -18,7 +18,7 @@ namespace AddressBookSystem_ADO
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public int Count { get; set; }
-        public string Type { get; set; }
+        public string Relation { get; set; }
 
     }
 }
