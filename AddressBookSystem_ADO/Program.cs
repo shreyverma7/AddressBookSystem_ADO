@@ -43,8 +43,10 @@ internal class Program
         string statesearch = "Hardware";
         //Operation.GetAllEmployeeDetailsByCity(citysearch);
         //Operation.DisplayAllDataByCity(citysearch);
-        Operation.GetAllEmployeeDetailsByState(statesearch);
-        Operation.DisplayAllDataByState(statesearch);
+        // Operation.GetAllEmployeeDetailsByState(statesearch);
+        //Operation.DisplayAllDataByState(statesearch);
+        Operation.SizeByCity();
+        Operation.SizeByState();
 
 
     }
