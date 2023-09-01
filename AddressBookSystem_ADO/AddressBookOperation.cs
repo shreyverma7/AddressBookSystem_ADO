@@ -377,5 +377,51 @@ namespace AddressBookSystem_ADO
                 con.Close();
             }
         }
+
+        public void GetPeopleInCitySortedByName(string City)
+        {
+            try
+            {
+                connection();
+                List<AddressModel> emplist = new List<AddressModel>();
+                SqlCommand com = new SqlCommand("GetPeopleInCitySortedByName", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("@city", City);
+                SqlDataAdapter da = new SqlDataAdapter(com);
+                DataTable dt = new DataTable();
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    emplist.Add(
+                        new AddressModel
+                        {
+                            Id = Convert.ToInt32(dr["id"]),
+                            FirstName = Convert.ToString(dr["firstname"]),
+                            LastName = Convert.ToString(dr["lastname"]),
+                            Address = Convert.ToString(dr["address"]),
+                            City = Convert.ToString(dr["city"]),
+                            State = Convert.ToString(dr["state"]),
+                            Zip = Convert.ToInt64(dr["zip"]),
+                            PhoneNumber = Convert.ToString(dr["phone"]),
+                            Email = Convert.ToString(dr["email"]),
+                        });
+                }
+                Console.WriteLine("The persons in the state " + City + " are: ");
+                foreach (var data in emplist)
+                {
+                    Console.WriteLine(data.Id+" "+ data.FirstName + " " + data.LastName);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
     }
 }
