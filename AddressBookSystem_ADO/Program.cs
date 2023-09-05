@@ -6,6 +6,7 @@ internal class Program
     {
         Console.WriteLine("-------: AddressBookSystem :-----");
         AddressBookOperation Operation = new AddressBookOperation();
+       
         //Operation.CreateDatabase();
        // Operation.CreateTable();
         AddressModel data = new AddressModel()
@@ -38,7 +39,8 @@ internal class Program
         {
             FirstName = "hello",
         };
-         //Operation.exuctedorNot(Operation.InsertData(data));
+        //Operation.exuctedorNot(Operation.InsertData(data));
+        Operation.GetAllDetails();
         //Operation.exuctedorNot(Operation.EditData(data));
         // Operation.exuctedorNot(Operation.DeleteDatat(data));
         string citysearch = "processor";
@@ -115,8 +117,9 @@ internal class Program
         });
 
         WithAndWithOutThread thread = new WithAndWithOutThread();
-        thread.UsingWithThread(list);
-        thread.UsingWithThread(list);
+      //  thread.UsingWithThread(list);
+      //  thread.UsingWithThread(list);
+
 
 
     }

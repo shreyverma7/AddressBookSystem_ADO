@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -210,6 +211,7 @@ namespace AddressBookSystem_ADO
                     }
                     );
             }
+           
             return emplist;
 
         }
@@ -504,6 +506,43 @@ namespace AddressBookSystem_ADO
             {
                 con.Close();
             }
+        }
+
+        //Get all employe and db into json File
+        public void GetAllDetails()
+        {
+            connection();
+            List<AddressModel> emplist = new List<AddressModel>();
+            SqlCommand com = new SqlCommand("AllDetails", con);
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);
+            con.Close();
+            foreach (DataRow dr in dt.Rows)
+            {
+                emplist.Add(
+                        new AddressModel
+                        {
+                            Id = Convert.ToInt32(dr["id"]),
+                            FirstName = Convert.ToString(dr["firstname"]),
+                            LastName = Convert.ToString(dr["lastname"]),
+                            Address = Convert.ToString(dr["address"]),
+                            City = Convert.ToString(dr["city"]),
+                            State = Convert.ToString(dr["state"]),
+                            Zip = Convert.ToInt64(dr["zip"]),
+                            PhoneNumber = Convert.ToString(dr["phone"]),
+                            Email = Convert.ToString(dr["email"]),
+                            Relation = Convert.ToString(dr["Relation"])                        
+                        });
+            }
+            foreach (var data in emplist)
+            {
+                Console.WriteLine(data.Id + " " + data.FirstName + " " + data.LastName + " " + data.Address + " " + data.City + " " + data.State + " " + data.Zip + " " + data.PhoneNumber + " " + data.Email + " " + data.Relation);
+            }
+            var json = JsonConvert.SerializeObject(emplist);
+            File.WriteAllText(@"D:\Bridgelabz Problem statement\AddressBookSystem_ADO\AddressBookSystem_ADO\AddressBookApiJSon.json", json);
         }
     }
 }
