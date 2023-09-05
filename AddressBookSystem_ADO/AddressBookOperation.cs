@@ -87,6 +87,7 @@ namespace AddressBookSystem_ADO
                 com.Parameters.AddWithValue("@Zip", obj.Zip);
                 com.Parameters.AddWithValue("@PhoneNumber", obj.PhoneNumber);
                 com.Parameters.AddWithValue("@Email", obj.Email);
+                com.Parameters.AddWithValue("@Relation", obj.Relation);
                 con.Open();
                 int i = com.ExecuteNonQuery(); //Execute and return the num of records added
                 con.Close();
